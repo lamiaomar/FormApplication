@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.formsapplication.fragment.MainFragment"
+        android:label="Main Fragment"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_formFlowFragment"
+            app:destination="@id/formFlowFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/formFlowFragment"
+        android:name="com.example.formflow.FormFlowFragment"
+        android:label="Form Flow Fragment"/>
+
+</navigation>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Forms Application</string>
+    <string name="hello_blank_fragment">Welcome to Form app</string>
+</resources>
