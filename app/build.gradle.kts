@@ -45,7 +45,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
-    implementation("com.github.lamiaomar:FormLibrary:2.1.0")
+    implementation("com.github.lamiaomar:FormLibrary:2.1.1")
 
     implementation("androidx.core:core-ktx:1.10.1")
 

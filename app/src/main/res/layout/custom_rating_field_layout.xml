@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="12dp">
 
     <TextView
         android:id="@+id/custom_field_label"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Rate our service:"
         android:textSize="16sp"
-        android:textColor="@android:color/black" />
+        android:textColor="#b26691" />
 
     <RatingBar
         android:id="@+id/custom_field_rating"

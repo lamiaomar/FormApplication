@@ -9,6 +9,7 @@ import com.example.formflow.field.Field
 import com.example.formflow.field.FieldType
 import com.example.formflow.field.GoogleSheetURL
 import com.example.formflow.listener.FormFlowListener
+import com.example.formsapplication.custom.CheckboxField
 import com.example.formsapplication.custom.CustomRatingField
 
 class MainActivity : AppCompatActivity(), FormFlowListener {
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity(), FormFlowListener {
     private lateinit var fragmentContainer: View
     private var customField: CustomRatingField? = null
 
+    private var buttonColor = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,30 +33,34 @@ class MainActivity : AppCompatActivity(), FormFlowListener {
         buttonContainer = findViewById(R.id.button_container)
         fragmentContainer = findViewById(R.id.fragment_container)
 
+
         buttonFormOne.setOnClickListener {
+            buttonColor = "#b26691"
             navigateToFormFlowFragment(getEventFormFields())
         }
 
         buttonFormTwo.setOnClickListener {
+            buttonColor = "#4E4F50"
             navigateToFormFlowFragment(getHospitalFormFields())
         }
 
         buttonFormThree.setOnClickListener {
+            buttonColor = "#914955"
             navigateToFormFlowFragment(getGeneralFormFields())
         }
-         customField = CustomRatingField(this)
+        customField = CustomRatingField(this)
     }
 
     private fun navigateToFormFlowFragment(formFields: ArrayList<Field>) {
         GoogleSheetURL.saveBaseUrl(
             this,
-            "https://script.google.com/macros/s/AKfycbw6SZN2nhRilS_hvNOlZLxcMlSzrTcJYSXGIRYcUOQNKc1DAoHsfHcb-IQTD1DMh2Ao/"
+            "https://script.google.com/macros/s/AKfycbyLYUhKferHsbZerz_qgaUl2d_0x8IZgpQ28ZZcROgUa1jG-ICGbO6az8MBH6In5s4VnA/"
         )
 
         val fragment = FormFlowFragment().apply {
             arguments = Bundle().apply {
                 putParcelableArrayList("formFields", formFields)
-                putString("submit_button_color", "#9f2b68")
+                putString("submit_button_color", buttonColor)
             }
         }
 
@@ -69,6 +76,15 @@ class MainActivity : AppCompatActivity(), FormFlowListener {
     private fun getEventFormFields() = arrayListOf(
         Field(FieldType.EDITTEXT, "What is your name?", "#b26691", true),
         Field(FieldType.EDITTEXT, "What is your email address?", "#b26691", true),
+        Field(FieldType.EDITTEXT, "What did you like most about the event?", "#b26691", false),
+        Field(FieldType.EDITTEXT, "What could be improved?", "#b26691", false),
+        Field(
+            FieldType.DROPLIST,
+            "How would you rate the event?",
+            "#b26691",
+            true,
+            dropList = arrayListOf("Excellent", "Good", "Average", "Poor")
+        ),
         Field(
             FieldType.RADIO,
             "How did you hear about the event?",
@@ -77,69 +93,69 @@ class MainActivity : AppCompatActivity(), FormFlowListener {
             radioList = arrayListOf("Friends", "Social Media", "Website", "Other")
         ),
         Field(
-            FieldType.DROPLIST,
-            "How would you rate the event?",
-            "#b26691",
-            true,
-            dropList = arrayListOf("Excellent", "Good", "Average", "Poor")
-        ),
-        Field(FieldType.EDITTEXT, "What did you like most about the event?", "#b26691", false),
-        Field(FieldType.EDITTEXT, "What could be improved?", "#b26691", false),
-        Field(
             FieldType.RADIO,
             "Would you attend future events?",
             "#b26691",
             true,
             radioList = arrayListOf("Yes", "No")
         ),
-        Field(FieldType.CUSTOM, "Rate our service", "#808080", true, customField = customField)
-
+        Field(FieldType.CUSTOM, "Rate our service", "#b26691", true, customField = customField)
     )
 
     private fun getHospitalFormFields() = arrayListOf(
-        Field(FieldType.EDITTEXT, "What is your name?", "#e39e54", true),
-        Field(FieldType.EDITTEXT, "What is your age?", "#e39e54", true),
+        Field(FieldType.EDITTEXT, "What is your name?", "#4E4F50", true),
+        Field(FieldType.EDITTEXT, "What is your age?", "#4E4F50", true),
+        Field(FieldType.EDITTEXT, "What department did you visit?", "#4E4F50", true),
         Field(
             FieldType.RADIO,
             "Was the hospital staff friendly?",
-            "#e39e54",
+            "#4E4F50",
             true,
             radioList = arrayListOf("Yes", "No", "Somewhat")
         ),
         Field(
-            FieldType.DROPLIST,
-            "How would you rate the cleanliness?",
-            "#e39e54",
-            true,
-            dropList = arrayListOf("Excellent", "Good", "Average", "Poor")
-        ),
-        Field(FieldType.EDITTEXT, "What department did you visit?", "#e39e54", true),
-        Field(
             FieldType.RADIO,
             "Was your waiting time reasonable?",
-            "#e39e54",
+            "#4E4F50",
             true,
             radioList = arrayListOf("Yes", "No")
         ),
-        Field(FieldType.EDITTEXT, "Any additional comments?", "#e39e54", false),
+        Field(
+            FieldType.DROPLIST,
+            "How would you rate the cleanliness?",
+            "#4E4F50",
+            true,
+            dropList = arrayListOf("Excellent", "Good", "Average", "Poor")
+        ),
         Field(
             FieldType.DROPLIST,
             "Would you recommend this hospital?",
-            "#e39e54",
+            "#4E4F50",
             true,
             dropList = arrayListOf("Definitely", "Probably", "Not sure", "No")
+        ),
+        Field(
+            FieldType.CUSTOM,
+            "Would you recommend this hospital?",
+            "#4E4F50",
+            true,
+            customField = CheckboxField(
+                this,
+                question = "Would you like to participate in future surveys?",
+                color = "#4E4F50"
+            )
+
         )
     )
 
     private fun getGeneralFormFields() = arrayListOf(
-        Field(FieldType.EDITTEXT, "What is your name?", "#d1d3b8", true),
+        Field(FieldType.EDITTEXT, "What is your name?", "#914955", true),
         Field(
             FieldType.RADIO,
             "How satisfied are you with our service?",
-            "#d1d3b8",
+            "#914955",
             true,
             radioList = arrayListOf(
-                "Very Satisfied",
                 "Satisfied",
                 "Neutral",
                 "Dissatisfied"
@@ -148,15 +164,15 @@ class MainActivity : AppCompatActivity(), FormFlowListener {
         Field(
             FieldType.DROPLIST,
             "How would you rate the quality of our product?",
-            "#d1d3b8",
+            "#914955",
             true,
             dropList = arrayListOf("Excellent", "Good", "Fair", "Poor")
         ),
-        Field(FieldType.EDITTEXT, "What can we do to improve?", "#d1d3b8", false),
+        Field(FieldType.EDITTEXT, "What can we do to improve?", "#914955", false),
         Field(
             FieldType.RADIO,
             "Would you recommend us to others?",
-            "#d1d3b8",
+            "#914955",
             true,
             radioList = arrayListOf("Yes", "No")
         )

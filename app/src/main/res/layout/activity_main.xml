@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:text="Choose a form to fill :"
+            android:text="Time to fill out a form!"
             android:textSize="25sp" />
 
         <Button
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="20dp"
-            android:text="General Three"
+            android:text="General Form"
             android:textColor="@color/white" />
     </LinearLayout>
 
